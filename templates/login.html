@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Contact Agenda</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-left">
+            <h1>Contact Agenda</h1>
+            <p class="lead">Simple and modern panel to manage your contacts. Login to access your dashboard.</p>
+            <div class="hero-illustration" aria-hidden="true"></div>
+        </div>
+        <div class="hero-right" style="margin-top: 160px;">
+            <div class="card form-card login-panel">
+                <h2 class="center">Welcome</h2>
+                <p class="text-muted center">Enter your username and password</p>
+                <form id="loginForm" class="stacked-form">
+                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit">Sign In</button>
+                </form>
+                <p class="text-muted center" id="loginErr"></p>
+                <p class="text-muted center">Return to <a href="{{ url_for('index') }}">home page</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            
+            const payload = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            };
+
+            fetch("{{ url_for('login') }}", {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(async response => {
+                const data = await response.json();
+                return { status: response.status, body: data };
+            })
+            .then(obj => {
+                if (obj.status === 200) {
+                    window.location.href = "{{ url_for('index') }}";
+                } else {
+                    document.getElementById('loginErr').textContent = obj.body.error || 'Authentication error';
+                }
+            })
+            .catch(error => {
+                document.getElementById('loginErr').textContent = 'Connection error';
+                console.error('Error:', error);
+            });
+        };
+    </script>
+</body>
+</html>
