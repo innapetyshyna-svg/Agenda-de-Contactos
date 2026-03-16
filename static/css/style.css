@@ -1,3 +1,6 @@
+
+
+
 /* Simplified stylesheet for Contact Agenda - essential rules only */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
@@ -30,12 +33,15 @@ body {
 }
 
 /* Layout container */
+
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 12px;
+    padding: 20px 10px;
+    background: rgba(255, 255, 255, 0.4); /* Полностью прозрачный */
 }
-
 /* Header */
 .header-bar {
     display: flex;
@@ -57,6 +63,90 @@ body {
     color: var(--muted);
     font-size: 14px;
 }
+
+/* background fone main page - расстянуло на весь экран       USEd*/  
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+   
+/* background fone main page - фоновая картинка       USEd*/  
+.hero-section {
+    position: relative;
+    background: url('/static/images/background_fone_purpur.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;    /* Элементы друг под другом */
+    align-items: stretch;      /* Растянуть по ширине */
+    justify-content: flex-start; /* Прижать к верху */
+    color: white;
+    /* text-align: center; - убрать или изменить */
+}
+
+
+/* Если нужен центрированный текст внутри, добавьте отдельный класс */
+.hero-content {
+    text-align: center;
+    /* другие стили */
+}
+
+/* static/css/style.css */
+
+/* Градиент для синей кнопки */
+.btn-gradient-blue {
+    background: linear-gradient(45deg, #4776E6, #8E54E9);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* Градиент для зеленой кнопки */
+.btn-gradient-green {
+    background: linear-gradient(45deg, #11998e, #38ef7d);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+/* Эффект при наведении для всех градиентных кнопок */
+.btn-gradient-blue:hover,
+.btn-gradient-green:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    color: white;
+}
+
+/* Эффект при нажатии */
+.btn-gradient-blue:active,
+.btn-gradient-green:active {
+    transform: translateY(0);
+}
+
+/* Если хотите добавить стили для всей шапки */
+.navbar-custom {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-custom .nav-link {
+    color: white !important;
+}
+
+.navbar-custom .navbar-brand {
+    color: white !important;
+}
+
 
 /* Cards */
 .card {
@@ -343,4 +433,40 @@ button.small {
 :focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
+}
+
+/* Мои кнопки - для start free */
+.btn-gradient {
+    background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+    background-size: 200% 200%; /* Для анимации градиента */
+    border: none;
+    color: white;
+    padding: 15px 50px;  /* Увеличили padding по бокам для ширины */
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 50px;  /* Делает овальной (большой радиус) */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    width: auto;          /* Автоматическая ширина */
+    min-width: 200px;     /* Минимальная ширина */
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Эффект при наведении */
+.btn-gradient:hover {
+    background-position: 100% 0; /* Двигаем градиент */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    color: white;
+}
+
+/* Эффект при нажатии */
+.btn-gradient:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
 }

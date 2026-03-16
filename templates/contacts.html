@@ -2,15 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact Agenе</title>
+    <title>Contact Agenda</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+   
 
-    
-
-
+    <div class="container">
+        <div class="header-bar">
+            <div class="brand">
+                <h1>Contact Agenda</h1>
+                <p class="text-muted">Manage your contacts. Log in to your dashboard.</p>
+            </div>
+            <div class="login-area card">
+                <button class="secondary" onclick="logout()">Logout</button>
+            </div>
+        </div>
+        
+        <div class="row" style="gap:18px;align-items:center;">
+            <div class="card form-card">
+                <h2>Welcome</h2>
+                <p class="lead">This is the main dashboard for managing your contacts.</p>
+                
+                <!-- Contacts List Section -->
+                <div class="contacts-section">
+                    <div class="contacts-header">
+                        <h3>Your Contacts</h3>
+                        <button class="primary" onclick="addContact()">Add New Contact</button>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search contacts..." onkeyup="searchContacts()">
+                    </div>
+                    
+                    <!-- Contacts Table -->
+                    <table class="contacts-table" id="contactsTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactsBody">
+                            <!-- Contacts will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // API fetch wrapper with authentication handling

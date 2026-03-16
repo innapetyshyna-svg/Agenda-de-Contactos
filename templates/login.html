@@ -3,9 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Contact Agenda</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
+
 <body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+     
+     <div class="hero-section"> <!-- Фоновая картинка здесь -->
+        <div class="hero-content-wrapper">
+            <div class="container-fluid p-0"><!-- Блок header -->
+            
+                <!-- Навигация -->
+                 <!-- НАЧАЛО НАШЕГО HEADER -->
+                <nav class="navbar navbar-expand-lg bg-transparent">
+                    <div class="container">
+                        <!-- Логотип -->
+                        <a class="navbar-brand" href="#">
+                            <img src="static/images/logo.png" alt="Company Logo" height="100">
+                        </a>
+
+                        <!-- Кнопка бургер -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <!-- Меню -->
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                                <li class="nav-item"><a class="nav-link text-white" href="#">FEATURES</a></li>
+                                <li class="nav-item"><a class="nav-link text-white" href="#">GRAPS</a></li>
+                                <li class="nav-item"><a class="nav-link text-white" href="#">MAP</a></li>
+                                <li class="nav-item"><a class="nav-link text-white" href="#">CONTACTS</a></li>
+                            </ul>
+
+                            <!-- Кнопки -->
+                            <form class="d-flex">
+                                <button type="button" class="btn btn-outline-light me-2">Login</button>
+                                <button type="button" class="btn btn-light">Sign in</button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+                <!-- КОНЕЦ HEADER -->
+            <!-- Контент по центру вертикально -->
+                        <div class="position-absolute top-50 start-50 translate-middle w-150">
+                            <div class="container text-center">
+                                <h1 class="main-headline">
+                                    <span class="d-block display-3 fw-bold">ALL YOUR CONTACTS</span>
+                                    <span class="headline-accent display-1 fw-bold text-primary">IN ONE PLACE</span>
+                                </h1>
+                                    <p class="lead text-white-50 mx-auto" style="max-width: 600px;">
+                                    Montera empowers smarter investing in real assets through secure technology, transparent insights, and long-term wealth growth.
+                                    </p>
+                                    <button class="btn-gradient">Start free</button>
+                                
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    
+    <!-- Просто контент для примера -->
+    <div class="container mt-4">
+        <h1>Основной контент страницы</h1>
+        <p>Текст здесь будет начинаться сразу под шапкой.</p>
+    </div>
+
+
+
     <div class="hero">
         <div class="hero-left">
             <h1>Contact Agenda</h1>
@@ -61,5 +147,10 @@
             });
         };
     </script>
+
+    <!-- Bootstrap JS - ОБЯЗАТЕЛЬНО для работы гамбургера -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 </html>
