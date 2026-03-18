@@ -2,74 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact Agenе</title>
+    <title>Contact Agenda</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+   
 
-     <div class="hero">
-        <div class="hero-left">
-            <h1>Contact Agenda</h1>
-            <p class="lead">Simple and modern panel to manage your contacts. Login to access your dashboard.</p>
-            <div class="hero-illustration" aria-hidden="true"></div>
+    <div class="container">
+        <div class="header-bar">
+            <div class="brand">
+                <h1>Contact Agenda</h1>
+                <p class="text-muted">Manage your contacts. Log in to your dashboard.</p>
+            </div>
+            <div class="login-area card">
+                <button class="secondary" onclick="logout()">Logout</button>
+            </div>
         </div>
-        <div class="hero-right" style="margin-top: 160px;">
-            <div class="card form-card login-panel">
-                <h2 class="center">Welcome</h2>
-                <p class="text-muted center">Enter your username and password</p>
-                <form id="loginForm" class="stacked-form">
-                    <input type="text" id="username" placeholder="Username" required>
-                    <input type="password" id="password" placeholder="Password" required>
-                    <button type="submit">Sign In</button>
-                </form>
-                <p class="text-muted center" id="loginErr"></p>
-                <p class="text-muted center">Return to <a href="{{ url_for('index') }}">home page</a></p>
+        
+        <div class="row" style="gap:18px;align-items:center;">
+            <div class="card form-card">
+                <h2>Welcome</h2>
+                <p class="lead">This is the main dashboard for managing your contacts.</p>
+                
+                <!-- Contacts List Section -->
+                <div class="contacts-section">
+                    <div class="contacts-header">
+                        <h3>Your Contacts</h3>
+                        <button class="primary" onclick="addContact()">Add New Contact</button>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search contacts..." onkeyup="searchContacts()">
+                    </div>
+                    
+                    <!-- Contacts Table -->
+                    <table class="contacts-table" id="contactsTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Address</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactsBody">
+                            <!-- Contacts will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById('loginForm').onsubmit = function(e) {
-            e.preventDefault();
-            
-            const payload = {
-                username: document.getElementById('username').value,
-                password: document.getElementById('password').value
-            };
-
-            fetch("{{ url_for('login') }}", {
-                method: 'POST',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(async response => {
-                const data = await response.json();
-                return { status: response.status, body: data };
-            })
-            .then(obj => {
-                if (obj.status === 200) {
-                    window.location.href = "{{ url_for('index') }}";
-                } else {
-                    document.getElementById('loginErr').textContent = obj.body.error || 'Authentication error';
-                }
-            })
-            .catch(error => {
-                document.getElementById('loginErr').textContent = 'Connection error';
-                console.error('Error:', error);
-            });
-        };
-    </script>
-
-    <!-- Bootstrap JS - ОБЯЗАТЕЛЬНО для работы гамбургера -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-
 
     <script>
         // API fetch wrapper with authentication handling
