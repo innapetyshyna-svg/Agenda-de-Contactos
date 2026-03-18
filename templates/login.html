@@ -2,20 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Contact Agenda</title>
+    <title>Contacts Agent</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 
 <body>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> <!-- подключение icons -->
      
      <div class="hero-section"> <!-- Фоновая картинка здесь -->
         <div class="hero-content-wrapper">
             <div class="container-fluid p-0"><!-- Блок header -->
             
                 <!-- Навигация -->
-                 <!-- НАЧАЛО НАШЕГО HEADER -->
+                <!-- НАЧАЛО НАШЕГО HEADER -->
                 <nav class="navbar navbar-expand-lg bg-transparent">
                     <div class="container">
                         <!-- Логотип -->
@@ -31,16 +32,24 @@
                         <!-- Меню -->
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                                <li class="nav-item"><a class="nav-link text-white" href="#">FEATURES</a></li>
-                                <li class="nav-item"><a class="nav-link text-white" href="#">GRAPS</a></li>
-                                <li class="nav-item"><a class="nav-link text-white" href="#">MAP</a></li>
-                                <li class="nav-item"><a class="nav-link text-white" href="#">CONTACTS</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#features">FEATURES</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#pricing">PRICING</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#faq">FAQ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#contacts">CONTACTS</a>
+                                </li>
                             </ul>
 
                             <!-- Кнопки -->
                             <form class="d-flex">
-                                <button type="button" class="btn btn-outline-light me-2">Login</button>
-                                <button type="button" class="btn btn-light">Sign in</button>
+                                <button type="button" class="btn-gradient-blue me-2">Sign up</button>
+                                <button type="button" class="btn-gradient-zero">Login</button>
                             </form>
                         </div>
                     </div>
@@ -53,10 +62,11 @@
                                     <span class="d-block display-3 fw-bold">ALL YOUR CONTACTS</span>
                                     <span class="headline-accent display-1 fw-bold text-primary">IN ONE PLACE</span>
                                 </h1>
+                                    
                                     <p class="lead text-white-50 mx-auto" style="max-width: 600px;">
-                                    Montera empowers smarter investing in real assets through secure technology, transparent insights, and long-term wealth growth.
+                                    Start organizing your contacts now
                                     </p>
-                                    <button class="btn-gradient">Start free</button>
+                                    <button class="btn-first-screen">GET STARTED</button>
                                 
                             </div>
                         </div>
@@ -67,90 +77,584 @@
         </div>
     </div>
 
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-    
-    <!-- Просто контент для примера -->
-    <div class="container mt-4">
-        <h1>Основной контент страницы</h1>
-        <p>Текст здесь будет начинаться сразу под шапкой.</p>
-    </div>
-
-
-
-    <div class="hero">
-        <div class="hero-left">
-            <h1>Contact Agenda</h1>
-            <p class="lead">Simple and modern panel to manage your contacts. Login to access your dashboard.</p>
-            <div class="hero-illustration" aria-hidden="true"></div>
-        </div>
-        <div class="hero-right" style="margin-top: 160px;">
-            <div class="card form-card login-panel">
-                <h2 class="center">Welcome</h2>
-                <p class="text-muted center">Enter your username and password</p>
-                <form id="loginForm" class="stacked-form">
-                    <input type="text" id="username" placeholder="Username" required>
-                    <input type="password" id="password" placeholder="Password" required>
-                    <button type="submit">Sign In</button>
-                </form>
-                <p class="text-muted center" id="loginErr"></p>
-                <p class="text-muted center">Return to <a href="{{ url_for('index') }}">home page</a></p>
+    <!-- Add stars -->
+    <div class="container py-6>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-4">
+                <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-md-start gap-2 gap-sm-3">
+                    <div class="text-warning fs-5">
+                        <span>⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <span class="text-secondary fw-medium fs-5">Trusted by 10,000+ users worldwide</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        document.getElementById('loginForm').onsubmit = function(e) {
-            e.preventDefault();
+
+    <!-- KEY FEATURES секция -->
+    <section id="features" class="py-5"> 
+        <div class="container py-5">
+            <!-- Заголовок -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-dark">KEY FEATURES</h1>
+                <p class="text-secondary fs-5">Everything you need to stay organized</p>
+            </div>
+
+            <!-- Сетка 3x2 -->
+            <div class="row g-4">
+                <!-- AI ASSISTANT -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <h3 class="feature-title">AI ASSISTANT</h3>
+                        <p class="feature-desc">Reminds birthdays, meetings, calls</p>
+                    </div>
+                </div>
+
+                <!-- SYNCH -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-arrow-repeat"></i>
+                        </div>
+                        <h3 class="feature-title">SYNCH</h3>
+                        <p class="feature-desc">Google, iCloud, Outlook, Telegram</p>
+                    </div>
+                </div>
+
+                <!-- SMART SEARCH -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-search-heart"></i>
+                        </div>
+                        <h3 class="feature-title">SMART SEARCH</h3>
+                        <p class="feature-desc">Search by photo, voice, tags</p>
+                    </div>
+                </div>
+
+                <!-- BUSINESS CARD SCANNER -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-upc-scan"></i>
+                        </div>
+                        <h3 class="feature-title">BUSINESS CARD SCANNER</h3>
+                        <p class="feature-desc">Text recognition</p>
+                    </div>
+                </div>
+
+                <!-- SECURITY -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="feature-title">SECURITY</h3>
+                        <p class="feature-desc">Biometric login, data encryption</p>
+                    </div>
+                </div>
+
+                <!-- ANALYTICS -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h3 class="feature-title">ANALYTICS</h3>
+                        <p class="feature-desc">Communication statistics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="py-5">
+        <div class="container py-5">
+            <!-- Заголовок -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-dark">HOW IT WORKS</h1>
+                <p class="text-secondary fs-5">Get started in 4 simple steps</p>
+            </div>
+
+            <!-- Сетка 4 шага -->
+            <div class="row g-4">
+                <!-- Step 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Sign Up</h3>
+                        <p class="step-desc">1-click registration</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Import</h3>
+                        <p class="step-desc">Import contacts</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">AI Analysis</h3>
+                        <p class="step-desc">Smart sorting</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Start Using</h3>
+                        <p class="step-desc">Work efficiently</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <!-- INTERFACE PREVIEW -->
+    <div class="container py-5">
+        <div class="text-center mb-4">
+            <h2 class="display-5 fw-bold text-dark">INTERFACE PREVIEW</h2>
+            <p class="text-secondary fs-5">See how it works in action</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="border rounded-4 overflow-hidden shadow-lg bg-white">
+                    <!-- Изображение-заглушка с путём к будущему видео -->
+                    <div class="bg-light position-relative" style="height: 400px;">
+                        <img src="path/to/interface-screenshot.jpg" 
+                            alt="Interface preview" 
+                            class="w-100 h-100 object-fit-cover">
+                        
+                        <!-- Наложение с иконкой play -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-25">
+                            <div class="bg-white rounded-circle p-4 shadow">
+                                <i class="bi bi-play-circle-fill text-primary fs-1"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Текст подсказки -->
+                        <div class="position-absolute bottom-0 start-0 w-100 p-3 bg-dark bg-opacity-75 text-white text-center">
+                            <i class="bi bi-camera-video me-2"></i>
+                            Видео-превью: path/to/your/video.mp4
+                        </div>
+                    </div>
+                    
+                    <!-- Кнопка -->
+                    <div class="p-4 text-center">
+                        <a href="link/to/demo" class="btn-gradient">
+                            View live demo 
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+        <!-- USER TESTIMONIALS CAROUSEL (стрелки снаружи) -->
+    <div class="container py-5">
+        <!-- Заголовок секции -->
+        <div class="text-center mb-4">
+            <h2 class="display-5 fw-bold text-dark">USER TESTIMONIALS</h2>
+            <p class="text-secondary fs-5">What our users say about us</p>
+        </div>
+
+        <!-- Основной ряд с каруселью и стрелками -->
+        <div class="row justify-content-center align-items-center">
+            <!-- Левая стрелка (десктоп) -->
+            <div class="col-1 d-none d-lg-block arrow-col-left">
+                <button class="btn-arrow-wrapper" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <div class="arrow-desktop">
+                        <i class="bi bi-chevron-left"></i>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Карусель с отзывами -->
+            <div class="col-12 col-lg-6">
+                <div id="testimonialCarousel" class="carousel slide">
+                    <!-- Индикаторы (точки) -->
+                    <div class="carousel-indicators custom-indicators">
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+
+                    <!-- Слайды -->
+                    <div class="carousel-inner">
+                        <!-- Slide 1 - Anna -->
+                        <div class="carousel-item active">
+                            <div class="testimonial-card">
+                                <div class="stars-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    <i class="bi bi-quote quote-icon"></i>
+                                    "The best contact management app! AI reminded me of my mom's birthday when I completely forgot. Thank you!"
+                                </p>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="user-avatar">
+                                        <i class="bi bi-person-circle"></i>
+                                    </div>
+                                    <div class="text-start">
+                                        <h5 class="fw-bold mb-0">Anna</h5>
+                                        <p class="text-secondary mb-0">Designer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 - Michael -->
+                        <div class="carousel-item">
+                            <div class="testimonial-card">
+                                <div class="stars-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    <i class="bi bi-quote quote-icon"></i>
+                                    "Sync with all services works flawlessly. I never lose contacts when switching phones anymore."
+                                </p>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="user-avatar">
+                                        <i class="bi bi-person-circle"></i>
+                                    </div>
+                                    <div class="text-start">
+                                        <h5 class="fw-bold mb-0">Michael</h5>
+                                        <p class="text-secondary mb-0">IT Director</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 - Sarah -->
+                        <div class="carousel-item">
+                            <div class="testimonial-card">
+                                <div class="stars-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <p class="testimonial-text">
+                                    <i class="bi bi-quote quote-icon"></i>
+                                    "Business card scanner saved me hours of manual data entry. It's incredibly accurate!"
+                                </p>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="user-avatar">
+                                        <i class="bi bi-person-circle"></i>
+                                    </div>
+                                    <div class="text-start">
+                                        <h5 class="fw-bold mb-0">Sarah</h5>
+                                        <p class="text-secondary mb-0">Sales Manager</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая стрелка (десктоп) -->
+            <div class="col-1 d-none d-lg-block arrow-col-right">
+                <button class="btn-arrow-wrapper" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <div class="arrow-desktop">
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Мобильные стрелки (внизу) -->
+        <div class="row d-lg-none mt-4">
+            <div class="col-12 d-flex justify-content-center gap-3">
+                <button class="arrow-mobile" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button class="arrow-mobile" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING PLANS SECTION -->
+    <section id="pricing" class="py-5">
+        <div class="container py-5">
+            <!-- Заголовок -->
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-dark">PRICING PLANS</h2>
+                <p class="text-secondary fs-5">Choose the perfect plan for your needs</p>
+            </div>
+
+            <!-- Карточки тарифов -->
+            <div class="row g-4 justify-content-center">
+                <!-- FREE PLAN -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card free">
+                        <h3 class="pricing-title">FREE</h3>
+                        
+                        <div class="pricing-price">
+                            <span class="currency">€</span>
+                            <span class="amount">0</span>
+                            <span class="period">/month</span>
+                        </div>
+                        
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> 100 contacts</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Basic search</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Import/export</li>
+                            <li class="disabled"><i class="bi bi-x-circle"></i> AI assistant</li>
+                            <li class="disabled"><i class="bi bi-x-circle"></i> Card scanner</li>
+                        </ul>
+                        
+                        <button class="pricing-btn">Choose Plan</button>
+                    </div>
+                </div>
+
+                <!-- PRO PLAN (популярный) -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card pro popular">
+                        <h3 class="pricing-title">PRO</h3>
+                        
+                        <div class="pricing-price">
+                            <span class="currency">€</span>
+                            <span class="amount">9,99</span>
+                            <span class="period">/month</span>
+                        </div>
+                        
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Unlimited contacts</li>
+                            <li><i class="bi bi-check-circle-fill"></i> AI assistant</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Card scanner</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Priority support</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Advanced search</li>
+                        </ul>
+                        
+                        <button class="pricing-btn">Choose Plan</button>
+                    </div>
+                </div>
+
+                <!-- BUSINESS PLAN -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card business">
+                        <h3 class="pricing-title">BUSINESS</h3>
+                        
+                        <div class="pricing-price">
+                            <span class="currency">€</span>
+                            <span class="amount">29,99</span>
+                            <span class="period">/month</span>
+                        </div>
+                        
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> Team collaboration</li>
+                            <li><i class="bi bi-check-circle-fill"></i> CRM integration</li>
+                            <li><i class="bi bi-check-circle-fill"></i> API access</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Custom domain</li>
+                            <li><i class="bi bi-check-circle-fill"></i> 24/7 support</li>
+                        </ul>
+                        
+                        <button class="pricing-btn">Choose Plan</button>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS SECTION -->
+    <section id="faq" class="py-5">
+        <div class="container py-5">
+            <!-- Заголовок -->
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-dark">FREQUENTLY ASKED QUESTIONS</h2>
+                <p class="text-secondary fs-5">Find answers to common questions</p>
+            </div>
+
+            <!-- Bootstrap Accordion -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <!-- Вопрос 1 -->
+                        <div class="accordion-item border rounded-4 mb-3 shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false" aria-controls="faq1">
+                                    How do I transfer contacts from Google?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary">
+                                    You can easily transfer contacts from Google in just a few steps:
+                                    <ul class="mt-2 mb-0">
+                                        <li>Go to Google Contacts and export as CSV or vCard</li>
+                                        <li>Open our app and select "Import Contacts"</li>
+                                        <li>Upload the file and all contacts will sync automatically</li>
+                                        <li>Your contacts will appear within seconds</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 2 -->
+                        <div class="accordion-item border rounded-4 mb-3 shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                    Is my data secure?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary">
+                                    Yes, your data security is our top priority:
+                                    <ul class="mt-2 mb-0">
+                                        <li>End-to-end encryption for all data</li>
+                                        <li>Biometric login protection (fingerprint, face ID)</li>
+                                        <li>Regular security audits and updates</li>
+                                        <li>Fully GDPR compliant</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вопрос 3 -->
+                        <div class="accordion-item border rounded-4 mb-3 shadow-sm">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                    Does it work offline?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary">
+                                    Yes! Our app supports full offline mode:
+                                    <ul class="mt-2 mb-0">
+                                        <li>View and edit contacts without internet</li>
+                                        <li>All changes sync automatically when back online</li>
+                                        <li>Offline search available</li>
+                                        <li>Works perfectly on planes, trains, and remote areas</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA SECTION -->
+    <section id="cta" class="py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="cta-container">
+                        <div class="cta-content">
+                            <!-- Заголовок с эмодзи ракеты -->
+                            <h2 class="cta-title">
+                                <i class="bi bi-rocket-takeoff"></i>
+                                START ORGANIZING YOUR CONTACTS TODAY
+                            </h2>
+                            
+                            <!-- Кнопка -->
+                            <button class="cta-btn">
+                                Sign Up for Free
+                            </button>
+                            
+                            <!-- Дополнительная информация -->
+                            <div class="cta-features">
+                                <span>
+                                    <i class="bi bi-credit-card"></i>
+                                    No credit card
+                                </span>
+                                <span>
+                                    <i class="bi bi-calendar-check"></i>
+                                    14-day trial
+                                </span>
+                                <span>
+                                    <i class="bi bi-x-circle"></i>
+                                    Cancel anytime
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Верхняя часть с логотипом и навигацией -->
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <i class="bi bi-grid-3x3-gap-fill"></i>
+                    <span>Ultimate Contact Hub</span>
+                    <span class="copyright">© 2026</span>
+                </div>
+                
+                <div class="footer-nav">
+                    <a href="#features">Products</a>      <!-- ведет к KEY FEATURES -->
+                    <a href="#how-it-works">Company</a>    <!-- ведет к HOW IT WORKS -->
+                    <a href="#faq">Support</a>             <!-- ведет к FAQ -->
+                    <a href="#contact">Legal</a>           <!-- ведет к CONTACT -->
+                </div>
+            </div>
             
-            const payload = {
-                username: document.getElementById('username').value,
-                password: document.getElementById('password').value
-            };
-
-            fetch("{{ url_for('login') }}", {
-                method: 'POST',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(async response => {
-                const data = await response.json();
-                return { status: response.status, body: data };
-            })
-            .then(obj => {
-                if (obj.status === 200) {
-                    window.location.href = "{{ url_for('index') }}";
-                } else {
-                    document.getElementById('loginErr').textContent = obj.body.error || 'Authentication error';
-                }
-            })
-            .catch(error => {
-                document.getElementById('loginErr').textContent = 'Connection error';
-                console.error('Error:', error);
-            });
-        };
-    </script>
-
-    <!-- Bootstrap JS - ОБЯЗАТЕЛЬНО для работы гамбургера -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
+            <!-- Социальные иконки -->
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            </div>
+            
+            <!-- Нижняя часть -->
+            <div class="footer-bottom">
+                <div class="footer-global">
+                    <span>
+                        <i class="bi bi-globe2"></i>
+                        Global
+                    </span>
+                    <span class="separator">•</span>
+                    <span>
+                        <i class="bi bi-translate"></i>
+                        English
+                    </span>
+                </div>
+                
+                <div class="footer-email">
+                    <i class="bi bi-envelope-fill"></i>
+                    <a href="mailto:help@contacthub.com" class="text-decoration-none text-primary">
+                        help@contacthub.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS и зависимости (нужны для работы аккордеона) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>    
 </body>
 </html>
