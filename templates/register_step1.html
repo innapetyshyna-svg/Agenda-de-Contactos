@@ -2,46 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Register step 1</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-
-    
     <div class="split-container">
 
-        <!-- ФОН НА ВЕСЬ ЭКРАН -->
         <div class="background-layer"></div>
 
-        <!-- ЛОГО СЛЕВА -->
         <div class="logo-wrapper">
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Логотип">
         </div>
 
-        <!-- ПРАВАЯ ЧАСТЬ (ФОРМА) -->
         <div class="right-panel">
             <div class="register-card">
-                
-                <h1>Sing in</h1>
-                <div class="register-sub">New user?
-                    <a href="{{ url_for('register_page') }}">Create an account</a>
-                </div>
+                <div class="register-sub">Step 1 of 2</div>
+                <h1>Sign up</h1>
+                <div class="register-sub">Create an account</div>
 
                 <form id="registerForm">
                     <div class="form-group">
-                        <label>Username</label>
+                        <label for="username">Username</label>
                         <input type="text" id="username" placeholder="Ana Maria" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Email</label>
+                        <label for="email">Email</label>
                         <input type="email" id="email" placeholder="name@example.com" required>
                     </div>
-                        <a href="{{ url_for('register_password_page') }}" class="text-decoration-none">
-                            <button type="submit" class="register-btn">Log in</button>
-                        </a>
-                    
+
+                    <button type="submit" class="register-btn">Continue</button>
 
                     <div id="formMessage" class="message"></div>
                 </form>
@@ -56,29 +47,31 @@
     </div>
 
     <script>
-    document.querySelector('.continue-btn').addEventListener('click', () => {
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
         const username = document.getElementById('username').value.trim();
         const email = document.getElementById('email').value.trim();
+        const formMessage = document.getElementById('formMessage');
+
+        formMessage.textContent = '';
 
         if (!username || !email) {
-            alert('Please fill in all fields');
+            formMessage.textContent = 'Please fill in all fields';
             return;
         }
 
         if (!email.includes('@')) {
-            alert('Please enter a valid email address');
+            formMessage.textContent = 'Please enter a valid email address';
             return;
         }
 
         sessionStorage.setItem('register_username', username);
         sessionStorage.setItem('register_email', email);
 
-        window.location.href = "/register/password";
+        window.location.href = "{{ url_for('register_password_page') }}";
     });
     </script>
 
-
-
-</body>
 </body>
 </html>

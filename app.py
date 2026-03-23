@@ -22,6 +22,11 @@ login_manager.init_app(app)  # Bind LoginManager to the Flask app
 login_manager.login_view = 'login_page'  # Redirect unauthorized users to the login page
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
 # User model for database table 'users'
 class User(db.Model, UserMixin):
     __tablename__ = 'users'  # Explicitly define table name
@@ -29,6 +34,7 @@ class User(db.Model, UserMixin):
     # User table columns
     id = db.Column(db.Integer, primary_key=True)  # Primary key, auto-incremented
     username = db.Column(db.String(255), unique=True, nullable=False)  # Unique username, required
+    email = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)  # User password, required
     
     # Relationship with contacts (commented out but can be used for ORM relationships)
@@ -46,43 +52,93 @@ class Contact(db.Model):
     email = db.Column(db.String(255))  # Email address, optional
     address = db.Column(db.Text)  # Physical address, optional (Text type for longer content)
 
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    Load user by ID for Flask-Login.
-    This function is required to reload the user object from the user ID stored in the session.
-    """
-    try:
-        # Retrieve user from database by ID
-        return db.session.get(User, int(user_id))
-    except (TypeError, ValueError):
-        # Return None if user_id is invalid
-        return None
+
 
 # HTML page routes
+@app.route('/')
+#@app.route('/index')
+def main_page():
+    """Serve the main application page"""
+    return render_template('index.html')
+
+
+@app.route('/register')
+def register_page():
+    return render_template('register_step1.html')
+
+
+@app.route('/register/password')
+def register_password_page():
+    return render_template('register_step2.html')
+
+
 @app.route('/login')
 def login_page():
-    """Serve the login page HTML"""
+    """Serve the singup application page"""
     return render_template('login.html')
 
-@app.route('/')
-@app.route('/index.html')
-@login_required  # Require authentication to access this page
-def index():
-    """Serve the main application page (contact list)"""
-    return render_template('index.html')
+
+@app.route('/api/register', methods=['POST'])
+def register():
+    """
+    Register a new user.
+    Expects JSON with username, email and password.
+    """
+
+    data = request.get_json(silent=True) or {}
+    username = data.get('username')
+    email = data.get('email')          # ✅ добавили
+    password = data.get('password')
+
+    # Проверка полей
+    if not username or not email or not password:
+        return jsonify({'erro': 'Username, email and password are required'}), 400
+
+    try:
+        # Проверка username
+        if User.query.filter_by(username=username).first():
+            return jsonify({'erro': 'Username already exists'}), 400
+
+        # Проверка email
+        if User.query.filter_by(email=email).first():
+            return jsonify({'erro': 'Email already exists'}), 400
+
+        # 🔒 Хеширование (очень желательно)
+        # from werkzeug.security import generate_password_hash
+        # hashed_password = generate_password_hash(password)
+
+        new_user = User(
+            username=username,
+            email=email,              # ✅ добавили
+            password=password         # лучше заменить на hashed_password
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        return jsonify({
+            'mensagem': 'User successfully registered'
+        }), 201
+
+    except SQLAlchemyError as err:
+        db.session.rollback()
+        return jsonify({'erro': str(err)}), 500
+
+
+
+
+
+
 
 # Authentication API routes
 @app.route('/api/login', methods=['POST'])
 def login():
-    """
-    Handle user login requests.
-    Expects JSON with username and password.
-    Returns success message if credentials are valid, error otherwise.
-    """
+   
+
     # Get JSON data from request, return empty dict if no JSON
     data = request.get_json(silent=True) or {}
     username = data.get('username')
+    email = data.get('email')
     password = data.get('password')
     
     # Validate required fields
@@ -108,7 +164,7 @@ def login():
 @app.route('/api/logout')
 @login_required  # User must be logged in to logout
 def logout():
-    """Handle user logout requests"""
+    
     logout_user()  # Log the user out (clears session)
     return jsonify({'mensagem': 'Logout efetuado.'})
 
@@ -116,10 +172,7 @@ def logout():
 @app.route('/api/contacts', methods=['GET'])
 @login_required  # User must be logged in to view contacts
 def get_contacts():
-    """
-    Retrieve all contacts for the currently logged-in user.
-    Returns a list of contacts in JSON format.
-    """
+
     try:
         # Query contacts belonging to current user
         contacts = Contact.query.filter_by(user_id=current_user.id).all()
@@ -141,11 +194,7 @@ def get_contacts():
 @app.route('/api/contacts', methods=['POST'])
 @login_required  # User must be logged in to add contacts
 def add_contact():
-    """
-    Add a new contact for the currently logged-in user.
-    Expects JSON with name, phone, and optional email/address.
-    Returns success message with new contact ID.
-    """
+
     # Get JSON data from request
     data = request.get_json(silent=True) or {}
     
@@ -179,11 +228,8 @@ def add_contact():
 @app.route('/api/contacts/<int:contact_id>', methods=['PUT'])
 @login_required  # User must be logged in to update contacts
 def update_contact(contact_id):
-    """
-    Update an existing contact.
-    URL parameter: contact_id - ID of the contact to update
-    Expects JSON with fields to update.
-    """
+  
+ 
     # Get JSON data from request
     data = request.get_json(silent=True) or {}
     
@@ -216,10 +262,8 @@ def update_contact(contact_id):
 @app.route('/api/contacts/<int:contact_id>', methods=['DELETE'])
 @login_required  # User must be logged in to delete contacts
 def delete_contact(contact_id):
-    """
-    Delete a contact.
-    URL parameter: contact_id - ID of the contact to delete
-    """
+    
+    
     try:
         # Find contact that belongs to current user
         contact = Contact.query.filter_by(id=contact_id, user_id=current_user.id).first()
@@ -240,11 +284,7 @@ def delete_contact(contact_id):
 @app.route('/api/contacts/search', methods=['GET'])
 @login_required  # User must be logged in to search contacts
 def search_contacts():
-    """
-    Search contacts by name, phone, or email.
-    Query parameter: q - search query string
-    Returns filtered list of contacts.
-    """
+
     # Get search query from URL parameters
     query = request.args.get('q', '')
     
