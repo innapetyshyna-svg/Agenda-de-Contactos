@@ -15,11 +15,12 @@
           <div class="hello-text">
             Hi, <span id="usernameText">{{ current_user.username if current_user.is_authenticated else 'User' }}</span>
           </div>
+          <a href="{{ url_for('logout_page') }}" class="logout-link">Log out</a>
         </div>
 
         <nav class="nav">
           <button class="active" data-view="dashboardView">Home</button>
-          <button data-view="dashboardView">Contacts</button>
+          <button data-view="contactsView">Contacts</button>
           <button data-view="chartsView">Charts</button>
           <button data-view="newContactView">New Contact</button>
         </nav>
@@ -28,6 +29,8 @@
       <div class="sidebar-card">
         <strong>Workspace</strong>
         <p>Manage contacts, search by name, phone or email, track birthdays, and keep everything in one place.</p>
+
+        
       </div>
     </aside>
 
@@ -140,6 +143,24 @@
               </div>
 
               <div class="panel-body birthday-list" id="birthdayList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contactsView" class="hidden">
+        <div class="panel">
+          <div class="card-header">
+            <div>
+              <h3>All Contacts</h3>
+              <p>Full contact list</p>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div class="contacts-layout">
+              <div class="panel contacts-list" id="contactsListOnly"></div>
+              <div class="panel details-wrap" id="contactDetailsOnly"></div>
             </div>
           </div>
         </div>
@@ -308,7 +329,7 @@
       birthday: document.getElementById('previewBirthdayValue')
     };
 
-    function showView(viewId) {
+    function showView(viewId, clickedButton = null) {
       document.querySelectorAll('main > section').forEach(section => {
         section.classList.add('hidden');
       });
@@ -322,9 +343,14 @@
         btn.classList.remove('active');
       });
 
-      document.querySelectorAll(`.nav button[data-view="${viewId}"]`).forEach(btn => {
-        btn.classList.add('active');
-      });
+      if (clickedButton) {
+        clickedButton.classList.add('active');
+      } else {
+        const button = document.querySelector(`.nav button[data-view="${viewId}"]`);
+        if (button) {
+          button.classList.add('active');
+        }
+      }
 
       if (viewId === 'chartsView') {
         setTimeout(refreshChartImages, 50);
@@ -551,6 +577,7 @@
 
     function renderAll() {
       renderContacts('contactsList', 'contactDetails');
+      renderContacts('contactsListOnly', 'contactDetailsOnly');
       renderBirthdays();
     }
 
@@ -663,7 +690,8 @@
     clearFormBtn.addEventListener('click', clearForm);
 
     newContactBtn.addEventListener('click', () => {
-      showView('newContactView');
+      const targetButton = document.querySelector('.nav button[data-view="newContactView"]');
+      showView('newContactView', targetButton);
     });
 
     globalSearch.addEventListener('input', async e => {
@@ -681,7 +709,7 @@
 
     document.querySelectorAll('.nav button').forEach(button => {
       button.addEventListener('click', () => {
-        showView(button.dataset.view);
+        showView(button.dataset.view, button);
       });
     });
 
@@ -738,7 +766,9 @@
 
         await loadContacts();
         refreshChartImages();
-        showView('dashboardView');
+
+        const homeButton = document.querySelector('.nav button[data-view="dashboardView"]');
+        showView('dashboardView', homeButton);
       } catch (error) {
         console.error(error);
         newContactMessage.textContent = 'Connection error.';

@@ -22,7 +22,7 @@
                     <div class="container">
                         <!-- Логотип -->
                         <a class="navbar-brand" href="#">
-                            <img src="static/images/logo.png" alt="Company Logo" height="100">
+                            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Company Logo" height="100">
                         </a>
 
                         <!-- Кнопка бургер -->
@@ -71,7 +71,9 @@
                             <p class="lead text-white-50 mx-auto" style="max-width: 600px;">
                             Start organizing your contacts now
                             </p>
-                            <button class="btn-first-screen">GET STARTED</button>
+                            <a href="{{ url_for('register_page') }}" class="text-decoration-none">
+                                <button class="btn-first-screen">GET STARTED</button>
+                            </a>
                                 
                     </div>
                 </div>
