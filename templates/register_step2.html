@@ -17,25 +17,25 @@
 
         <div class="right-panel">
             <div class="register-card">
-                <div class="step-label">Step 2 of 2</div>
+                <div class="register-sub">Step 2 of 2</div>
                 <h1>Set your password</h1>
                 <div class="register-sub">Finish creating your account</div>
 
                 <form id="registerStep2Form" novalidate>
-                    <div class="form-group password-group">
+                    <div class="password-group">
                         <label for="password">Password</label>
                         <div class="password-wrapper">
-                            <input type="password" id="password" placeholder="Enter password" required>
+                            <input type="password" id="password" name="password" placeholder="Enter password" required>
                             <button type="button" class="toggle-password" data-target="password">👁️</button>
                         </div>
                         <div class="field-hint">Minimum 8 characters</div>
                         <div class="error-message" id="passwordError"></div>
                     </div>
 
-                    <div class="form-group password-group">
+                    <div class="password-group">
                         <label for="confirmPassword">Confirm password</label>
                         <div class="password-wrapper">
-                            <input type="password" id="confirmPassword" placeholder="Repeat password" required>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat password" required>
                             <button type="button" class="toggle-password" data-target="confirmPassword">👁️</button>
                         </div>
                         <div class="error-message" id="confirmPasswordError"></div>
@@ -51,31 +51,10 @@
                         </div>
                     </div>
 
-                    <div class="optional-title">Optional</div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone number</label>
-                        <input type="tel" id="phone" placeholder="+351 912 345 678">
-                        <div class="error-message" id="phoneError"></div>
-                    </div>
-
-                    <div class="checkbox-group">
-                        <label class="checkbox-row">
-                            <input type="checkbox" id="terms" required>
-                            <span>
-                                I accept the
-                                <a href="#">Terms of Use</a>
-                                and
-                                <a href="#">Privacy Policy</a>.
-                            </span>
-                        </label>
-                        <div class="error-message" id="termsError"></div>
-                    </div>
-
                     <div class="checkbox-group">
                         <label class="checkbox-row">
                             <input type="checkbox" id="news">
-                            <span>I agree to receive news and special offers.</span>
+                            <span>Remember me</span>
                         </label>
                     </div>
 
@@ -94,148 +73,139 @@
     </div>
 
     <script>
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const phoneInput = document.getElementById('phone');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
 
-    const passwordError = document.getElementById('passwordError');
-    const confirmPasswordError = document.getElementById('confirmPasswordError');
-    const termsError = document.getElementById('termsError');
-    const formMessage = document.getElementById('formMessage');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const formMessage = document.getElementById('formMessage');
 
-    const strengthFill = document.getElementById('strengthFill');
-    const strengthText = document.getElementById('strengthText');
+        const strengthFill = document.getElementById('strengthFill');
+        const strengthText = document.getElementById('strengthText');
 
-    document.querySelectorAll('.toggle-password').forEach(button => {
-        button.addEventListener('click', () => {
-            const targetId = button.getAttribute('data-target');
-            const input = document.getElementById(targetId);
-            input.type = input.type === 'password' ? 'text' : 'password';
-        });
-    });
-
-    document.getElementById('backBtn').addEventListener('click', () => {
-        window.location.href = "/register";
-    });
-
-    passwordInput.addEventListener('input', updatePasswordStrength);
-
-    function updatePasswordStrength() {
-        const password = passwordInput.value;
-        let score = 0;
-
-        if (password.length >= 8) score++;
-        if (/[A-Z]/.test(password) || /[a-z]/.test(password)) score++;
-        if (/\d/.test(password)) score++;
-        if (/[^A-Za-z0-9]/.test(password)) score++;
-
-        strengthFill.className = 'strength-fill';
-
-        if (password.length === 0) {
-            strengthText.textContent = 'Weak';
-            strengthFill.style.width = '0%';
-            return;
-        }
-
-        if (score <= 1) {
-            strengthText.textContent = 'Weak';
-            strengthFill.style.width = '33%';
-            strengthFill.classList.add('weak');
-        } else if (score <= 3) {
-            strengthText.textContent = 'Medium';
-            strengthFill.style.width = '66%';
-            strengthFill.classList.add('medium');
-        } else {
-            strengthText.textContent = 'Strong';
-            strengthFill.style.width = '100%';
-            strengthFill.classList.add('strong');
-        }
-    }
-
-    document.getElementById('registerStep2Form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        passwordError.textContent = '';
-        confirmPasswordError.textContent = '';
-        termsError.textContent = '';
-        formMessage.textContent = '';
-
-        const username = sessionStorage.getItem('register_username');
-        const email = sessionStorage.getItem('register_email');
-        const password = passwordInput.value.trim();
-        const confirmPassword = confirmPasswordInput.value.trim();
-        const phone = phoneInput.value.trim();
-        const termsAccepted = document.getElementById('terms').checked;
-        const newsAccepted = document.getElementById('news').checked;
-
-        let hasError = false;
-
-        if (!username || !email) {
-            formMessage.textContent = 'Registration data is missing. Please start again.';
-            setTimeout(() => {
-                window.location.href = "/register";
-            }, 1200);
-            return;
-        }
-
-        if (!password) {
-            passwordError.textContent = 'Please enter a password';
-            hasError = true;
-        } else if (password.length < 8) {
-            passwordError.textContent = 'Password must be at least 8 characters';
-            hasError = true;
-        }
-
-        if (!confirmPassword) {
-            confirmPasswordError.textContent = 'Please confirm your password';
-            hasError = true;
-        } else if (password !== confirmPassword) {
-            confirmPasswordError.textContent = 'Passwords do not match';
-            hasError = true;
-        }
-
-        if (!termsAccepted) {
-            termsError.textContent = 'You must accept the terms to continue';
-            hasError = true;
-        }
-
-        if (hasError) return;
-
-        try {
-            const res = await fetch('/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: username,
-                    email: email,
-                    password: password,
-                    phone: phone,
-                    news: newsAccepted
-                })
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+                input.type = input.type === 'password' ? 'text' : 'password';
             });
+        });
 
-            const data = await res.json();
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = "/register";
+        });
 
-            if (res.status === 201) {
-                sessionStorage.removeItem('register_username');
-                sessionStorage.removeItem('register_email');
+        passwordInput.addEventListener('input', updatePasswordStrength);
 
-                formMessage.textContent = 'Registration successful';
-                formMessage.classList.add('success-message');
+        function updatePasswordStrength() {
+            const password = passwordInput.value;
+            let score = 0;
 
-                setTimeout(() => {
-                    window.location.href = "/login";
-                }, 800);
-            } else {
-                formMessage.textContent = data.erro || 'Registration error';
+            if (password.length >= 8) score++;
+            if (/[A-Z]/.test(password) || /[a-z]/.test(password)) score++;
+            if (/\d/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+
+            strengthFill.className = 'strength-fill';
+
+            if (password.length === 0) {
+                strengthText.textContent = 'Weak';
+                strengthFill.style.width = '0%';
+                return;
             }
-        } catch (err) {
-            console.error(err);
-            formMessage.textContent = 'Connection error';
+
+            if (score <= 1) {
+                strengthText.textContent = 'Weak';
+                strengthFill.style.width = '33%';
+                strengthFill.classList.add('weak');
+            } else if (score <= 3) {
+                strengthText.textContent = 'Medium';
+                strengthFill.style.width = '66%';
+                strengthFill.classList.add('medium');
+            } else {
+                strengthText.textContent = 'Strong';
+                strengthFill.style.width = '100%';
+                strengthFill.classList.add('strong');
+            }
         }
-    });
+
+        document.getElementById('registerStep2Form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            passwordError.textContent = '';
+            confirmPasswordError.textContent = '';
+            formMessage.textContent = '';
+            formMessage.classList.remove('success-message');
+
+            const username = sessionStorage.getItem('register_username');
+            const email = sessionStorage.getItem('register_email');
+            const password = passwordInput.value.trim();
+            const confirmPassword = confirmPasswordInput.value.trim();
+            const newsAccepted = document.getElementById('news').checked;
+
+            let hasError = false;
+
+            if (!username || !email) {
+                formMessage.textContent = 'Registration data is missing. Please start again.';
+                setTimeout(() => {
+                    window.location.href = "/register";
+                }, 1200);
+                return;
+            }
+
+            if (!password) {
+                passwordError.textContent = 'Please enter a password';
+                hasError = true;
+            } else if (password.length < 8) {
+                passwordError.textContent = 'Password must be at least 8 characters';
+                hasError = true;
+            }
+
+            if (!confirmPassword) {
+                confirmPasswordError.textContent = 'Please confirm your password';
+                hasError = true;
+            } else if (password !== confirmPassword) {
+                confirmPasswordError.textContent = 'Passwords do not match';
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password,
+                        news: newsAccepted
+                    })
+                });
+
+                const data = await res.json();
+
+                if (res.status === 201) {
+                    sessionStorage.removeItem('register_username');
+                    sessionStorage.removeItem('register_email');
+
+                    formMessage.textContent = 'Registration successful';
+                    formMessage.classList.add('success-message');
+
+                    setTimeout(() => {
+                        window.location.href = "/contacts";
+                    }, 800);
+                } else {
+                    formMessage.textContent = data.erro || 'Registration error';
+                }
+            } catch (err) {
+                console.error(err);
+                formMessage.textContent = 'Connection error';
+            }
+        });
+</script>
     </script>
 </body>
 </html>
