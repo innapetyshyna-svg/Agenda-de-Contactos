@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contacts Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_contacts.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/contacts.css') }}">
 </head>
 <body>
   <div class="app">
     <aside class="sidebar">
-      <div class="sidebar-top">
+      <div class="sidebar-top sidebar-top-contacts">
         <div class="logo-block">
           <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="sidebar-logo">
           <div class="hello-text">
@@ -179,7 +180,7 @@
 
               <div class="panel-body">
                 <div class="chart-image-box">
-                  <img id="overviewChartImage" alt="Contacts Overview Chart">
+                  <img id="overviewChartImage" alt="Contacts Overview Chart"> 
                 </div>
               </div>
             </div>

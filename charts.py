@@ -1,12 +1,13 @@
 import io
 import pandas as pd
 import matplotlib
+import string
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
-def build_contacts_dataframe(contacts):
+def build_contacts_dataframe(contacts): #Converts a list of contact objects into a pandas DataFrame
     data = []
 
     for c in contacts:
@@ -29,34 +30,49 @@ def build_contacts_dataframe(contacts):
 def generate_overview_chart(contacts):
     df = build_contacts_dataframe(contacts)
 
-    total_contacts = len(df)
-    with_email = 0
-    with_birthday = 0
+    # Предполагаем, что есть колонка с именем (например 'name')
+    if 'name' not in df.columns:
+        raise ValueError("Column 'name' not found in contacts data")
 
-    if 'email' in df.columns:
-        with_email = df['email'].fillna('').astype(str).str.strip().ne('').sum()
+    # Берём первую букву имени
+    first_letters = (
+        df['name']
+        .fillna('')
+        .astype(str)
+        .str.strip()
+        .str[0]
+        .str.upper()
+    )
 
-    if 'birthday' in df.columns:
-        with_birthday = df['birthday'].notna().sum()
+    # Оставляем только английские буквы
+    letters = list(string.ascii_uppercase)
+    counts = {letter: 0 for letter in letters}
 
-    labels = ['Contacts', 'With Email', 'With Birthday']
-    values = [int(total_contacts), int(with_email), int(with_birthday)]
+    for letter in first_letters:
+        if letter in counts:
+            counts[letter] += 1
 
-    fig, ax = plt.subplots(figsize=(7, 4))
+    labels = list(counts.keys())
+    values = list(counts.values())
+
+    # Строим график
+    fig, ax = plt.subplots(figsize=(10, 5))
     bars = ax.bar(labels, values)
 
-    ax.set_title('Contacts Overview')
-    ax.set_ylabel('Count')
-    ax.set_ylim(0, max(values + [1]) + 2)
+    ax.set_title('Contacts by First Letter')
+    ax.set_xlabel('Alphabet (A-Z)')
+    ax.set_ylabel('Number of Contacts')
 
+    # Подписи значений
     for bar, value in zip(bars, values):
-        ax.text(
-            bar.get_x() + bar.get_width() / 2,
-            bar.get_height() + 0.05,
-            str(value),
-            ha='center',
-            va='bottom'
-        )
+        if value > 0:
+            ax.text(
+                bar.get_x() + bar.get_width() / 2,
+                bar.get_height(),
+                str(value),
+                ha='center',
+                va='bottom'
+            )
 
     plt.tight_layout()
 
@@ -68,7 +84,7 @@ def generate_overview_chart(contacts):
     return img
 
 
-def generate_birthdays_chart(contacts):
+def generate_birthdays_chart(contacts):   #Generates a chart showing birthday distribution by month
     df = build_contacts_dataframe(contacts)
 
     month_names = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',

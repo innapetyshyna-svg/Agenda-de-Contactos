@@ -1,0 +1,429 @@
+/* =============================================
+   Auth Pages (Login & Register)
+   ============================================= */
+
+/* Full-screen background image */
+.background-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("/static/images/background_fone_purpur.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+
+/* Split-screen container */
+.split-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Left panel (background + overlay) */
+.left-panel {
+    flex: 1;
+    position: relative;
+    background-image: url('/static/images/background_fone_purpur.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+}
+
+/* Logo centered in the left panel */
+.logo-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+    padding: 20px;
+}
+
+.logo-wrapper img {
+    max-width: 100%;
+    max-height: 280px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+}
+
+/* Right panel — the form card */
+.right-panel {
+    width: 600px;
+    max-width: 100%;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    overflow-y: auto;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.05);
+    margin: 40px 120px 40px 40px;
+    z-index: 0;
+}
+
+/* Register / login card inside the right panel */
+.register-card {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.register-card h1 {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: #1c1c1e;
+    margin-bottom: 8px;
+}
+
+.register-sub {
+    font-size: 15px;
+    color: #5e5e66;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #ececef;
+    padding-bottom: 20px;
+}
+
+.step-label {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+/* =============================================
+   Form fields
+   ============================================= */
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1c1c1e;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 1px solid #d1d1d6;
+    border-radius: 14px;
+    background: #ffffff;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: #118EBF;
+    box-shadow: 0 0 0 3px rgba(17, 142, 191, 0.12);
+}
+
+.password-group {
+    margin-bottom: 2px;
+}
+
+.password-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1c1c1e;
+    margin-bottom: 8px;
+}
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding: 14px 48px 14px 16px;
+    font-size: 16px;
+    border: 1px solid #d1d1d6;
+    border-radius: 14px;
+    background: #ffffff;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.password-wrapper input:focus {
+    border-color: #118EBF;
+    box-shadow: 0 0 0 3px rgba(17, 142, 191, 0.12);
+}
+
+.toggle-password {
+    position: absolute;
+    right: 14px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    color: #6b7280;
+    padding: 0;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+    color: #118EBF;
+}
+
+.field-hint {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* =============================================
+   Password strength indicator
+   ============================================= */
+.strength-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.strength-bar {
+    flex: 1;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    transition: width 0.2s ease;
+}
+
+.strength-fill.weak   { background: #ef4444; }
+.strength-fill.medium { background: #f59e0b; }
+.strength-fill.strong { background: #10b981; }
+
+.strength-text {
+    min-width: 56px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* =============================================
+   Checkboxes / optional fields
+   ============================================= */
+.optional-title {
+    margin: 18px 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.checkbox-group {
+    margin-top: 10px;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #374151;
+}
+
+.checkbox-row input[type="checkbox"] {
+    margin-top: 3px;
+    width: auto;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.checkbox-row a {
+    color: #0ea5e9;
+    text-decoration: none;
+}
+
+.checkbox-row a:hover {
+    text-decoration: underline;
+}
+
+/* =============================================
+   Buttons
+   ============================================= */
+.register-btn {
+    width: 100%;
+    background: #118EBF;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 20px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.05s;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.register-btn:hover {
+    background: #0d759d;
+    opacity: 1;
+}
+
+.register-btn:active {
+    transform: scale(0.98);
+}
+
+.button-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.button-row .back-btn,
+.button-row .register-btn {
+    flex: 1;
+}
+
+.back-btn {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #d1d5db;
+    border-radius: 50px;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #f9fafb;
+    opacity: 1;
+}
+
+/* =============================================
+   Redirect link & messages
+   ============================================= */
+.login-redirect {
+    text-align: center;
+    font-size: 14px;
+    color: #5e5e66;
+    margin-top: 16px;
+}
+
+.login-redirect a {
+    color: #118EBF;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 4px;
+}
+
+.login-redirect a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 13px;
+    margin-top: 4px;
+    min-height: 14px;
+}
+
+.success-message {
+    color: #059669;
+}
+
+.message {
+    font-size: 13px;
+    margin-top: 12px;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: #f2f2f5;
+    color: #3a3a3c;
+}
+
+.message.error {
+    background: #ffe8e6;
+    color: #c72a1f;
+}
+
+.message.success {
+    background: #e6f4e8;
+    color: #1e7b3a;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 900px) {
+    .right-panel {
+        width: 420px;
+        padding: 32px 24px;
+        margin-right: 40px;
+    }
+
+    .register-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        flex: 0 0 30%;
+        min-height: 30vh;
+    }
+
+    .right-panel {
+        width: 100%;
+        flex: 1;
+        box-shadow: none;
+        padding: 32px 20px;
+        margin: 0;
+    }
+
+    .logo-wrapper img {
+        max-height: 140px;
+    }
+
+    body {
+        overflow: auto;
+    }
+}
