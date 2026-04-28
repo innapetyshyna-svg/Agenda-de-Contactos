@@ -2,6 +2,8 @@ import io
 import pandas as pd
 import matplotlib
 import string
+from datetime import datetime
+
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -121,6 +123,49 @@ def generate_birthdays_chart(contacts):   #Generates a chart showing birthday di
 
     plt.tight_layout()
 
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight')
+    plt.close(fig)
+    img.seek(0)
+
+    return img
+
+
+def generate_age_histogram(contacts):
+    df = build_contacts_dataframe(contacts)
+
+    if df.empty or 'birthday' not in df.columns:
+        raise ValueError("No birthday data available")
+
+    # Убираем пустые значения
+    df = df[df['birthday'].notna()].copy()
+
+    if df.empty:
+        raise ValueError("No valid birthdays found")
+
+    # Преобразуем в datetime
+    df['birthday'] = pd.to_datetime(df['birthday'], errors='coerce')
+    df = df.dropna(subset=['birthday'])
+
+    # Текущая дата
+    today = datetime.today()
+
+    # Считаем возраст
+    df['age'] = df['birthday'].apply(
+        lambda b: today.year - b.year - ((today.month, today.day) < (b.month, b.day))
+    )
+
+    # Строим гистограмму
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.hist(df['age'], bins=10)
+
+    ax.set_title('Age Distribution')
+    ax.set_xlabel('Age')
+    ax.set_ylabel('Number of Contacts')
+
+    plt.tight_layout()
+
+    # Сохраняем в память
     img = io.BytesIO()
     plt.savefig(img, format='png', bbox_inches='tight')
     plt.close(fig)

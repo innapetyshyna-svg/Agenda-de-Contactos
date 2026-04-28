@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import or_
 from datetime import datetime
 
-from charts import generate_overview_chart, generate_birthdays_chart
+from charts import generate_overview_chart, generate_birthdays_chart, generate_age_histogram
 
 app = Flask(__name__)
 app.secret_key = '4f3d2a1b8e7c6d5e4f3d2a1b8e7c6d5e'
@@ -84,11 +84,11 @@ def contacts_main_page():
     return render_template('contacts_main.html')
 
 
-@app.route('/charts/overview.png')
+@app.route('/charts/generate.png')
 @login_required
-def chart_overview():
+def chart_generate():
     contacts = Contact.query.filter_by(user_id=current_user.id).all()
-    img = generate_overview_chart(contacts)
+    img = generate_age_histogram(contacts)
     return send_file(img, mimetype='image/png')
 
 

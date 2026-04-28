@@ -173,14 +173,14 @@
             <div class="panel">
               <div class="card-header">
                 <div>
-                  <h3>Contacts Overview</h3>
-                  <p>Generated with pandas and matplotlib</p>
+                  <h3>Generate age histogram</h3>
+                  
                 </div>
               </div>
 
               <div class="panel-body">
                 <div class="chart-image-box">
-                  <img id="overviewChartImage" alt="Contacts Overview Chart"> 
+                  <img id="generateChartImage" alt="Generate age histogram"> 
                 </div>
               </div>
             </div>
@@ -387,11 +387,11 @@
     function refreshChartImages() {
       const timestamp = Date.now();
 
-      const overviewChart = document.getElementById('overviewChartImage');
+      const generateChart = document.getElementById('generateChartImage');
       const birthdayChart = document.getElementById('birthdayChartImage');
 
-      if (overviewChart) {
-        overviewChart.src = `{{ url_for('chart_overview') }}?t=${timestamp}`;
+      if (generateChart) {
+        generateChart.src = `{{ url_for('chart_generate') }}?t=${timestamp}`;
       }
 
       if (birthdayChart) {
